@@ -111,18 +111,5 @@ document.addEventListener('DOMContentLoaded', () => {
         const productLocation = productLocationInput.value.trim();
 
         // Validação para garantir que todos os campos foram preenchidos corretamente
-        if (productName && !isNaN(productQuantity) && productCategory && productExpiry && productLocation) {
-            addProduct(productName, productQuantity, productCategory, productExpiry, productLocation);
-            productNameInput.value = '';
-            productQuantityInput.value = '';
-            productCategoryInput.value = '';
-            productExpiryInput.value = '';
-            productLocationInput.value = '';
-        } else {
-            alert('Por favor, preencha todos os campos corretamente!');
-        }
-    });
+        if (
 
-    // Renderizar os produtos ao carregar a página
-    renderProducts();
-});
