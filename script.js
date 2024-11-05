@@ -8,20 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const stockList = document.getElementById('stock-list');
     const stockCounter = document.getElementById('stock-counter');
 
-    
+    // Carrega os produtos do localStorage ou inicia com um array vazio
     let products = JSON.parse(localStorage.getItem('products')) || [];
 
-    
+    // Função para salvar os produtos no localStorage
     function saveProductsToLocalStorage() {
         localStorage.setItem('products', JSON.stringify(products));
     }
 
-   
+    // Função para atualizar o contador de produtos no estoque
     function updateStockCounter() {
         stockCounter.textContent = `Produtos no estoque: ${products.length}`;
     }
 
-    
+    // Função para adicionar um novo produto ao estoque
     function addProduct(name, quantity, category, expiry, location) {
         const product = {
             name: name,
@@ -29,23 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
             category: category,
             expiry: expiry,
             location: location,
-            completed: false  
+            completed: false  // Define o status do produto como não concluído
         };
         products.push(product);
         saveProductsToLocalStorage();
         renderProducts();
     }
 
+    // Função para renderizar os produtos no estoque
     function renderProducts() {
-        stockList.innerHTML = ''; /
+        stockList.innerHTML = ''; // Limpa a tabela antes de renderizar
         products.forEach((product, index) => {
             const productRow = document.createElement('tr');
-            productRow.classList.toggle('completed', product.completed);  `completed`
+            productRow.classList.toggle('completed', product.completed); // Marca como concluído se o produto tiver o status `completed`
 
             productRow.innerHTML = `
                 <td>${product.name}</td>
                 <td>
-                    ${product.quantity.toFixed(1)} 
+                    ${product.quantity} 
                     <button class="remove-quantity" data-index="${index}">-</button>
                     <button class="add-quantity" data-index="${index}">+</button>
                 </td>
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         updateStockCounter();
 
-       
+        // Adiciona o evento de remoção de produto para cada botão "Remover"
         const removeButtons = document.querySelectorAll('.remove-product');
         removeButtons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-       
+        // Adiciona o evento de marcação de tarefa como "Concluída"
         const completeButtons = document.querySelectorAll('.complete-task');
         completeButtons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -79,40 +80,41 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        
+        // Adiciona evento para adicionar quantidade de um produto
         const addQuantityButtons = document.querySelectorAll('.add-quantity');
         addQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, 1); 
+                changeQuantity(index, 1); // Aumenta a quantidade em 1 unidade
             });
         });
 
-        
+        // Adiciona evento para remover quantidade de um produto
         const removeQuantityButtons = document.querySelectorAll('.remove-quantity');
         removeQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, -1);
+                changeQuantity(index, -1); // Diminui a quantidade em 1 unidade
             });
         });
     }
 
-    
+    // Função para remover um produto
     function removeProduct(index) {
-        products.splice(index, 1); 
+        products.splice(index, 1); // Remove o produto da lista
         saveProductsToLocalStorage();
         renderProducts();
     }
 
- 
+    // Função para marcar um produto como concluído
     function markAsCompleted(index) {
         products[index].completed = !products[index].completed;
         saveProductsToLocalStorage();
         renderProducts();
     }
 
-       function changeQuantity(index, amount) {
+    // Função para alterar a quantidade de um produto
+    function changeQuantity(index, amount) {
         if (products[index].quantity + amount >= 0) {
             products[index].quantity += amount;
             saveProductsToLocalStorage();
@@ -120,9 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Adiciona um novo produto ao clicar no botão "Adicionar Produto"
     addProductButton.addEventListener('click', () => {
         const productName = productNameInput.value.trim();
-        const productQuantity = parseFloat(productQuantityInput.value);
+        const productQuantity = parseInt(productQuantityInput.value); // Use parseInt para garantir que é um número inteiro
         const productCategory = productCategoryInput.value.trim();
         const productExpiry = productExpiryInput.value;
         const productLocation = productLocationInput.value.trim();
@@ -139,5 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Renderiza os produtos quando a página for carregada
     renderProducts();
 });
