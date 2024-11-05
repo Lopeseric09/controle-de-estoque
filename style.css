@@ -1,5 +1,5 @@
 body {
-    font-family: Serif;
+    font-family: Lucida Bright;
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
@@ -94,13 +94,13 @@ button.remove-product {
 .signature {
     text-align: center;
     margin-top: 30px;
-    font-size: 5px;
+    font-size: 15px;
     color: #555;
 }
 
 .author-name {
     font-family: 'Dancing Script', cursive;
-    font-size: 10px;
+    font-size: 18px;
     color: #4CAF50;
     font-weight: bold;
     margin-left: 5px;
