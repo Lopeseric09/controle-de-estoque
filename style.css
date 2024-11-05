@@ -1,45 +1,42 @@
-/* Estilo básico para o body */
+/* Estilo para a página */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    min-height: 100vh;
     margin: 0;
 }
 
-/* Estilo para o container */
 .container {
-    background: white;
+    background-color: white;
     padding: 20px;
-    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
-    max-width: 900px;
+    max-width: 1200px;
+    margin-top: 20px;
 }
 
-/* Estilo para o título */
 h1 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Formulário de entrada */
 .form-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     gap: 10px;
     margin-bottom: 20px;
-    justify-content: space-between;
 }
 
-input[type="text"], input[type="number"], input[type="date"] {
+input[type="text"],
+input[type="number"],
+input[type="date"] {
     padding: 10px;
-    width: 48%;
-    font-size: 14px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
 }
 
 button {
@@ -47,48 +44,37 @@ button {
     background-color: #4CAF50;
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 4px;
-    width: 48%;
-    font-size: 14px;
+    cursor: pointer;
 }
 
 button:hover {
     background-color: #45a049;
 }
 
-/* Tabela de produtos - estilo de planilha */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
-
 th, td {
-    padding: 12px;
+    padding: 10px;
     text-align: left;
+    border: 1px solid #ddd;
 }
 
 th {
     background-color: #f2f2f2;
 }
 
-/* Estilo para os botões de quantidade */
-button.add-quantity, button.remove-quantity {
-    width: 30px;
-    padding: 5px;
-    font-size: 16px;
-    border: none;
+button.remove-quantity,
+button.add-quantity,
+button.remove-product {
+    padding: 5px 10px;
+    font-size: 14px;
     cursor: pointer;
-}
-
-button.add-quantity {
-    background-color: #4CAF50;
-    color: white;
+    margin-left: 5px;
 }
 
 button.remove-quantity {
@@ -96,23 +82,13 @@ button.remove-quantity {
     color: white;
 }
 
-button.add-quantity:hover {
-    background-color: #45a049;
-}
-
-button.remove-quantity:hover {
-    background-color: #e53935;
+button.add-quantity {
+    background-color: #4CAF50;
+    color: white;
 }
 
 button.remove-product {
-    background-color: #ff6b6b;
+    background-color: #FF9800;
     color: white;
-    border: none;
-    padding: 6px 10px;
-    cursor: pointer;
-    border-radius: 4px;
 }
 
-button.remove-product:hover {
-    background-color: #ff4444;
-}
