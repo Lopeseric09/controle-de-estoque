@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: name,
             quantity: quantity,
             price: price,
-            category: category,
+            category: Número de série,
             expiry: expiry,
             location: location,
         };
