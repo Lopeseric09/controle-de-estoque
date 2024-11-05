@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             productRow.innerHTML = `
                 <td>${product.name}</td>
                 <td>
-                    ${product.quantity.toFixed(1)} 
+                    ${product.quantity} 
                     <button class="remove-quantity" data-index="${index}">-</button>
                     <button class="add-quantity" data-index="${index}">+</button>
                 </td>
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adiciona um novo produto ao clicar no botão "Adicionar Produto"
     addProductButton.addEventListener('click', () => {
         const productName = productNameInput.value.trim();
-        const productQuantity = parseFloat(productQuantityInput.value);
+        const productQuantity = parseInt(productQuantityInput.value); // Garantir que seja um número inteiro
         const productCategory = productCategoryInput.value.trim();
         const productExpiry = productExpiryInput.value;
         const productLocation = productLocationInput.value.trim();
@@ -145,5 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderiza os produtos quando a página for carregada
     renderProducts();
 });
+
 
 
