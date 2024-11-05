@@ -45,15 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             productRow.innerHTML = `
                 <td>${product.name}</td>
-                <td>${product.quantity}</td>
+                <td>
+                    ${product.quantity.toFixed(1)} 
+                    <button class="remove-quantity" data-index="${index}">-</button>
+                    <button class="add-quantity" data-index="${index}">+</button>
+                </td>
                 <td>${product.category}</td>
                 <td>${product.expiry}</td>
                 <td>${product.location}</td>
                 <td>
                     <button class="remove-product" data-index="${index}">Remover</button>
                     <button class="complete-task" data-index="${index}">Concluir</button>
-                    <button class="add-quantity" data-index="${index}">+</button>
-                    <button class="remove-quantity" data-index="${index}">-</button>
                 </td>
             `;
             stockList.appendChild(productRow);
@@ -83,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, 1); // Aumenta a quantidade em 1
+                changeQuantity(index, 0.1); // Aumenta a quantidade em 0.1
             });
         });
 
@@ -92,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         removeQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, -1); // Diminui a quantidade em 1
+                changeQuantity(index, -0.1); // Diminui a quantidade em 0.1
             });
         });
     }
@@ -123,12 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adiciona um novo produto ao clicar no botão "Adicionar Produto"
     addProductButton.addEventListener('click', () => {
         const productName = productNameInput.value.trim();
-        const productQuantity = parseInt(productQuantityInput.value, 10);
+        const productQuantity = parseFloat(productQuantityInput.value);
         const productCategory = productCategoryInput.value.trim();
         const productExpiry = productExpiryInput.value;
         const productLocation = productLocationInput.value.trim();
 
-        if (productName && productQuantity && productCategory && productExpiry && productLocation) {
+        if (productName && !isNaN(productQuantity) && productQuantity > 0 && productCategory && productExpiry && productLocation) {
             addProduct(productName, productQuantity, productCategory, productExpiry, productLocation);
             productNameInput.value = '';
             productQuantityInput.value = '';
@@ -136,10 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
             productExpiryInput.value = '';
             productLocationInput.value = '';
         } else {
-            alert('Por favor, preencha todos os campos!');
+            alert('Por favor, preencha todos os campos corretamente!');
         }
     });
 
     // Renderiza os produtos quando a página for carregada
     renderProducts();
 });
+
