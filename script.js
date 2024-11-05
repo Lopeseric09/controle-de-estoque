@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para renderizar os produtos no estoque
     function renderProducts() {
-        stockList.innerHTML = '';
+        stockList.innerHTML = ''; // Limpa a tabela antes de renderizar
         products.forEach((product, index) => {
             const productRow = document.createElement('tr');
             productRow.innerHTML = `
@@ -63,12 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const productCategory = productCategoryInput.value.trim();
         const productExpiry = productExpiryInput.value.trim();
 
+        // Verifica se todos os campos estão preenchidos antes de adicionar
         if (productName && productQuantity && productCategory && productExpiry) {
             addProduct(productName, productQuantity, productCategory, productExpiry);
             productNameInput.value = ''; // Limpa o campo de nome do produto
             productQuantityInput.value = ''; // Limpa o campo de quantidade
             productCategoryInput.value = ''; // Limpa o campo de categoria
             productExpiryInput.value = ''; // Limpa o campo de prazo
+        } else {
+            alert("Por favor, preencha todos os campos!");
         }
     });
 
