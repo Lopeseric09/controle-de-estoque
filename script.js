@@ -43,6 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
             expiry: expiry,
             location: location,
         };
+
+        // Verificar se a quantidade do produto é menor que 2 e exibir o alerta
+        if (quantity < 2) {
+            alert(`O produto "${name}" está acabando!`);
+        }
+
         products.push(product);
         saveProductsToLocalStorage();
         renderProducts();
@@ -137,13 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert('Por favor, preencha todos os campos corretamente!');
         }
-         if (product.quantity < 2) {
-                alert(`O produto "${product.name}" está acabando!`);
     });
 
     // Renderiza os produtos quando a página for carregada
     renderProducts();
 });
+
 
 
 
