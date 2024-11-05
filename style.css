@@ -1,4 +1,3 @@
-
 /* Reset e configurações iniciais */
 * {
     margin: 0;
@@ -44,7 +43,7 @@ h1 {
 }
 
 .input-group input {
-    width: 23%;
+    width: 18%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
