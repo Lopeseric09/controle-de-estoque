@@ -1,34 +1,21 @@
-/* Reset e configurações iniciais */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-    width: 100%;
-}
-
+/* Estilo para a página */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-    padding-top: 30px;
 }
 
 .container {
-    background: white;
+    background-color: white;
     padding: 20px;
-    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
-    max-width: 900px;
-    text-align: left;
+    max-width: 1200px;
+    margin-top: 20px;
 }
 
 h1 {
@@ -36,96 +23,75 @@ h1 {
     margin-bottom: 20px;
 }
 
-.input-group {
-    display: flex;
-    justify-content: space-between;
+.form-container {
+    display: grid;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.input-group input {
-    width: 18%;
+input[type="text"],
+input[type="number"],
+input[type="date"] {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
 }
 
-.input-group button {
-    width: 12%;
+button {
     padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
 }
 
-.input-group button:hover {
+button:hover {
     background-color: #45a049;
 }
 
-#stock-table {
+table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-#stock-table th, #stock-table td {
-    padding: 12px;
-    text-align: center;
+th, td {
+    padding: 10px;
+    text-align: left;
     border: 1px solid #ddd;
 }
 
-#stock-table th {
-    background-color: #f4f4f4;
+th {
+    background-color: #f2f2f2;
 }
 
+button.remove-quantity,
+button.add-quantity,
 button.remove-product {
-    background: none;
-    border: none;
-    color: red;
-    cursor: pointer;
-}
-
-button.complete-task {
-    background: none;
-    border: none;
-    color: green;
-    cursor: pointer;
-}
-
-button.add-quantity, button.remove-quantity {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 18px;
     padding: 5px 10px;
+    font-size: 14px;
     cursor: pointer;
-}
-
-button.add-quantity {
-    background-color: green;
+    margin-left: 5px;
 }
 
 button.remove-quantity {
-    background-color: red;
+    background-color: #f44336;
+    color: white;
 }
 
-button.add-quantity:hover, button.remove-quantity:hover {
-    opacity: 0.8;
+button.add-quantity {
+    background-color: #4CAF50;
+    color: white;
 }
 
-#stock-counter {
-    text-align: center;
-    margin-top: 20px;
-    font-weight: bold;
+button.remove-product {
+    background-color: #FF9800;
+    color: white;
 }
 
-.completed {
-    background-color: #e0ffe0;  /* Marca a célula com fundo verde claro quando o item é completado */
-    text-decoration: line-through;
-    color: gray;
 }
 
 
