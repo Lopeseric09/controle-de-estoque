@@ -5,45 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="container">
         <h1>Controle de Estoque</h1>
 
-        <!-- Formulário para adicionar um novo produto -->
         <div class="form-container">
             <input type="text" id="product-name" placeholder="Nome do Produto" required>
             <input type="number" id="product-quantity" placeholder="Quantidade" min="1" required>
+            <input type="number" id="product-price" placeholder="Preço (R$)" step="0.01" required>
             <input type="text" id="product-category" placeholder="Categoria" required>
             <input type="date" id="product-expiry" required>
             <input type="text" id="product-location" placeholder="Localização" required>
             <button id="add-product">Adicionar Produto</button>
         </div>
 
-        <!-- Tabela de produtos no estoque -->
         <table>
             <thead>
                 <tr>
                     <th>Produto</th>
                     <th>Quantidade</th>
+                    <th>Valor</th>
                     <th>Categoria</th>
                     <th>Validade</th>
                     <th>Localização</th>
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody id="stock-list">
-                <!-- Produtos adicionados aparecerão aqui -->
-            </tbody>
+            <tbody id="stock-list"></tbody>
         </table>
 
         <p id="stock-counter">Produtos no estoque: 0</p>
+        <p id="total-value">Valor Total em Estoque: R$ 0,00</p>
+    </div>
+
+    <div class="signature">
+        <p>Desenvolvido por <span class="author-name">Eric Lopes</span></p>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
