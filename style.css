@@ -22,6 +22,7 @@ body {
 /* Estilo para o título */
 h1 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 /* Formulário de entrada */
@@ -56,7 +57,7 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Tabela de produtos */
+/* Tabela de produtos - estilo de planilha */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -102,3 +103,17 @@ button.add-quantity:hover {
 button.remove-quantity:hover {
     background-color: #e53935;
 }
+
+button.remove-product {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button.remove-product:hover {
+    background-color: #ff4444;
+}
+
