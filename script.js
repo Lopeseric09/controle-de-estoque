@@ -110,6 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const productExpiry = productExpiryInput.value;
         const productLocation = productLocationInput.value.trim();
 
-        // Validação para garantir que todos os campos foram preenchidos corretamente
-        if (
+        //
+
 
