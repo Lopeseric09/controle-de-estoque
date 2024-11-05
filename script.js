@@ -137,14 +137,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert('Por favor, preencha todos os campos corretamente!');
         }
-// Exibe alerta se a quantidade do produto for menor que 1
-            if (product.quantity < 2) {
+         if (product.quantity < 2) {
                 alert(`O produto "${product.name}" está acabando!`);
     });
 
- 
+    // Renderiza os produtos quando a página for carregada
     renderProducts();
 });
+
 
 
 
