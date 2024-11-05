@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             productRow.innerHTML = `
                 <td>${product.name}</td>
                 <td>
-                    ${product.quantity.toFixed(1)} 
+                    ${product.quantity} 
                     <button class="remove-quantity" data-index="${index}">-</button>
                     <button class="add-quantity" data-index="${index}">+</button>
                 </td>
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, 0.1); // Aumenta a quantidade em 0.1
+                changeQuantity(index, 1); // Aumenta a quantidade em 1 unidade
             });
         });
 
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         removeQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, -0.1); // Diminui a quantidade em 0.1
+                changeQuantity(index, -1); // Diminui a quantidade em 1 unidade
             });
         });
     }
@@ -125,11 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adiciona um novo produto ao clicar no botão "Adicionar Produto"
     addProductButton.addEventListener('click', () => {
         const productName = productNameInput.value.trim();
-        const productQuantity = parseFloat(productQuantityInput.value);
+        const productQuantity = parseInt(productQuantityInput.value); // Use parseInt para garantir que é um número inteiro
         const productCategory = productCategoryInput.value.trim();
         const productExpiry = productExpiryInput.value;
         const productLocation = productLocationInput.value.trim();
 
+        // Validação dos campos antes de adicionar o produto
         if (productName && !isNaN(productQuantity) && productQuantity > 0 && productCategory && productExpiry && productLocation) {
             addProduct(productName, productQuantity, productCategory, productExpiry, productLocation);
             productNameInput.value = '';
@@ -145,4 +146,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderiza os produtos quando a página for carregada
     renderProducts();
 });
-
