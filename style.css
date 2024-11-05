@@ -1,4 +1,5 @@
 
+/* Reset e configurações iniciais */
 * {
     margin: 0;
     padding: 0;
@@ -93,4 +94,3 @@ button.remove-product {
     margin-top: 20px;
     font-weight: bold;
 }
-
