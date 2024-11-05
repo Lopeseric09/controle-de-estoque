@@ -98,13 +98,22 @@ button.complete-task {
 button.add-quantity, button.remove-quantity {
     background: none;
     border: none;
-    color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    padding: 5px 10px;
     cursor: pointer;
-    font-size: 16px;
+}
+
+button.add-quantity {
+    background-color: green;
+}
+
+button.remove-quantity {
+    background-color: red;
 }
 
 button.add-quantity:hover, button.remove-quantity:hover {
-    color: #45a049;
+    opacity: 0.8;
 }
 
 #stock-counter {
