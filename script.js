@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const stockList = document.getElementById('stock-list');
     const stockCounter = document.getElementById('stock-counter');
 
-    let products = JSON.parse(localStorage.getItem('products')) || []; // Carrega os produtos do localStorage
+    // Carrega os produtos do localStorage
+    let products = JSON.parse(localStorage.getItem('products')) || [];
 
     // Função para salvar os produtos no localStorage
     function saveProductsToLocalStorage() {
@@ -42,18 +43,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${product.quantity}</td>
                 <td>${product.category}</td>
                 <td>${product.expiry}</td>
-                <td><button class="remove-product" onclick="removeProduct(${index})">Remover</button></td>
+                <td><button class="remove-product" data-index="${index}">Remover</button></td>
             `;
             stockList.appendChild(productRow);
         });
         updateStockCounter();
+
+        // Adiciona o evento de remoção de produto para cada botão "Remover"
+        const removeButtons = document.querySelectorAll('.remove-product');
+        removeButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.target.dataset.index;
+                removeProduct(index);
+            });
+        });
     }
 
     // Função para remover um produto do estoque
     function removeProduct(index) {
-        products.splice(index, 1);
+        products.splice(index, 1); // Remove o produto pelo índice
         saveProductsToLocalStorage();
-        renderProducts();
+        renderProducts(); // Re-renderiza a lista de produtos
     }
 
     // Adiciona produto ao clicar no botão
