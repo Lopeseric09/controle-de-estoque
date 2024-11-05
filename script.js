@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const productNameInput = document.getElementById('product-name');
     const productQuantityInput = document.getElementById('product-quantity');
+    const productPriceInput = document.getElementById('product-price');
     const productCategoryInput = document.getElementById('product-category');
     const productExpiryInput = document.getElementById('product-expiry');
     const productLocationInput = document.getElementById('product-location');
     const addProductButton = document.getElementById('add-product');
     const stockList = document.getElementById('stock-list');
     const stockCounter = document.getElementById('stock-counter');
+    const totalValueElement = document.getElementById('total-value');
 
     // Carrega os produtos do localStorage ou inicia com um array vazio
     let products = JSON.parse(localStorage.getItem('products')) || [];
@@ -18,15 +20,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para atualizar o contador de produtos no estoque
     function updateStockCounter() {
-        const totalQuantity = products.reduce((total, product) => total + product.quantity, 0);
-        stockCounter.textContent = `Produtos no estoque: ${totalQuantity}`;
+        stockCounter.textContent = `Produtos no estoque: ${products.length}`;
+        updateTotalValue();
+    }
+
+    // Função para calcular e atualizar o valor total do estoque
+    function updateTotalValue() {
+        let totalValue = 0;
+        products.forEach(product => {
+            totalValue += product.quantity * product.price;
+        });
+        totalValueElement.textContent = `Valor Total em Estoque: R$ ${totalValue.toFixed(2)}`;
     }
 
     // Função para adicionar um novo produto ao estoque
-    function addProduct(name, quantity, category, expiry, location) {
+    function addProduct(name, quantity, price, category, expiry, location) {
         const product = {
             name: name,
             quantity: quantity,
+            price: price,
             category: category,
             expiry: expiry,
             location: location,
@@ -41,13 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
         stockList.innerHTML = ''; // Limpa a tabela antes de renderizar
         products.forEach((product, index) => {
             const productRow = document.createElement('tr');
+
             productRow.innerHTML = `
                 <td>${product.name}</td>
                 <td>
-                    ${product.quantity} 
+                    ${product.quantity}
                     <button class="remove-quantity" data-index="${index}">-</button>
                     <button class="add-quantity" data-index="${index}">+</button>
                 </td>
+                <td>R$ ${product.price.toFixed(2)}</td>
                 <td>${product.category}</td>
                 <td>${product.expiry}</td>
                 <td>${product.location}</td>
@@ -57,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             stockList.appendChild(productRow);
         });
-
         updateStockCounter();
 
         // Adiciona o evento de remoção de produto para cada botão "Remover"
@@ -97,42 +110,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para alterar a quantidade de um produto
     function changeQuantity(index, amount) {
-        const product = products[index];
-        if (product.quantity + amount >= 0) {
-            product.quantity += amount;
+        if (products[index].quantity + amount >= 0) {
+            products[index].quantity += amount;
             saveProductsToLocalStorage();
             renderProducts();
-            
-            // Exibe alerta se a quantidade do produto for menor que 1
-            if (product.quantity < 2) {
-                alert(`O produto "${product.name}" está acabando!`);
-            }
         }
     }
 
     // Adiciona um novo produto ao clicar no botão "Adicionar Produto"
     addProductButton.addEventListener('click', () => {
         const productName = productNameInput.value.trim();
-        const productQuantity = parseInt(productQuantityInput.value); // Garantir que seja um número inteiro
+        const productQuantity = parseInt(productQuantityInput.value);
+        const productPrice = parseFloat(productPriceInput.value);
         const productCategory = productCategoryInput.value.trim();
         const productExpiry = productExpiryInput.value;
         const productLocation = productLocationInput.value.trim();
 
-        if (productName && !isNaN(productQuantity) && productQuantity > 0 && productCategory && productExpiry && productLocation) {
-            addProduct(productName, productQuantity, productCategory, productExpiry, productLocation);
+        if (productName && !isNaN(productQuantity) && productQuantity > 0 && !isNaN(productPrice) && productPrice > 0 && productCategory && productExpiry && productLocation) {
+            addProduct(productName, productQuantity, productPrice, productCategory, productExpiry, productLocation);
             productNameInput.value = '';
             productQuantityInput.value = '';
+            productPriceInput.value = '';
             productCategoryInput.value = '';
             productExpiryInput.value = '';
             productLocationInput.value = '';
         } else {
             alert('Por favor, preencha todos os campos corretamente!');
         }
+// Exibe alerta se a quantidade do produto for menor que 1
+            if (product.quantity < 2) {
+                alert(`O produto "${product.name}" está acabando!`);
     });
 
-    // Renderiza os produtos quando a página for carregada
+ 
     renderProducts();
 });
+
 
 
 
