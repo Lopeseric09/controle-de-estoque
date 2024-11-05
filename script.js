@@ -28,8 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             quantity: quantity,
             category: category,
             expiry: expiry,
-            location: location,
-            completed: false  // Define o status do produto como não concluído
+            location: location
         };
         products.push(product);
         saveProductsToLocalStorage();
@@ -38,10 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para renderizar os produtos no estoque
     function renderProducts() {
-        stockList.innerHTML = ''; // Limpa a tabela antes de renderizar
+        stockList.innerHTML = ''; // Limpa a lista antes de renderizar
         products.forEach((product, index) => {
             const productRow = document.createElement('tr');
-            productRow.classList.toggle('completed', product.completed); // Marca como concluído se o produto tiver o status `completed`
 
             productRow.innerHTML = `
                 <td>${product.name}</td>
@@ -55,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${product.location}</td>
                 <td>
                     <button class="remove-product" data-index="${index}">Remover</button>
-                    <button class="complete-task" data-index="${index}">Concluir</button>
                 </td>
             `;
             stockList.appendChild(productRow);
@@ -71,21 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Adiciona o evento de marcação de tarefa como "Concluída"
-        const completeButtons = document.querySelectorAll('.complete-task');
-        completeButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                const index = e.target.dataset.index;
-                markAsCompleted(index);
-            });
-        });
-
         // Adiciona evento para adicionar quantidade de um produto
         const addQuantityButtons = document.querySelectorAll('.add-quantity');
         addQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, 1.0); // Aumenta a quantidade em 1 unidade
+                changeQuantity(index, 1); // Aumenta a quantidade em 1 unidade
             });
         });
 
@@ -94,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         removeQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, -1.0); // Diminui a quantidade em 1 unidade
+                changeQuantity(index, -1); // Diminui a quantidade em 1 unidade
             });
         });
     }
@@ -102,13 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para remover um produto
     function removeProduct(index) {
         products.splice(index, 1); // Remove o produto da lista
-        saveProductsToLocalStorage();
-        renderProducts();
-    }
-
-    // Função para marcar um produto como concluído
-    function markAsCompleted(index) {
-        products[index].completed = !products[index].completed;
         saveProductsToLocalStorage();
         renderProducts();
     }
@@ -142,6 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Por favor, preencha todos os campos corretamente!');
         }
     });
+
+    // Renderiza os produtos quando a página for carregada
+    renderProducts();
+});
+
 
     // Renderiza os produtos quando a página for carregada
     renderProducts();
