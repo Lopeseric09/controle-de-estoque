@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
             quantity: quantity,
             category: category,
             expiry: expiry,
-            location: location
+            location: location,
+            completed: false  // Define o status do produto como não concluído
         };
         products.push(product);
         saveProductsToLocalStorage();
@@ -40,13 +41,18 @@ document.addEventListener('DOMContentLoaded', () => {
         stockList.innerHTML = ''; // Limpa a tabela antes de renderizar
         products.forEach((product, index) => {
             const productRow = document.createElement('tr');
+            productRow.classList.toggle('completed', product.completed); // Marca como concluído se o produto tiver o status `completed`
+
             productRow.innerHTML = `
                 <td>${product.name}</td>
                 <td>${product.quantity}</td>
                 <td>${product.category}</td>
                 <td>${product.expiry}</td>
                 <td>${product.location}</td>
-                <td><button class="remove-product" data-index="${index}">Remover</button></td>
+                <td>
+                    <button class="remove-product" data-index="${index}">Remover</button>
+                    <button class="complete-task" data-index="${index}">Concluir</button>
+                </td>
             `;
             stockList.appendChild(productRow);
         });
@@ -60,11 +66,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 removeProduct(index);
             });
         });
+
+        // Adiciona o evento de marcação de tarefa como "Concluída"
+        const completeButtons = document.querySelectorAll('.complete-task');
+        completeButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.target.dataset.index;
+                markAsCompleted(index);
+            });
+        });
     }
 
     // Função para remover um produto do estoque
     function removeProduct(index) {
         products.splice(index, 1); // Remove o produto pelo índice
+        saveProductsToLocalStorage();
+        renderProducts(); // Re-renderiza a lista de produtos
+    }
+
+    // Função para marcar o produto como concluído
+    function markAsCompleted(index) {
+        products[index].completed = true; // Marca o produto como concluído
         saveProductsToLocalStorage();
         renderProducts(); // Re-renderiza a lista de produtos
     }
@@ -83,10 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
             productNameInput.value = ''; // Limpa o campo de nome do produto
             productQuantityInput.value = ''; // Limpa o campo de quantidade
             productCategoryInput.value = ''; // Limpa o campo de categoria
-            productExpiryInput.value = ''; // Limpa o campo de prazo
+            productExpiryInput.value = ''; // Limpa o campo de validade
             productLocationInput.value = ''; // Limpa o campo de localização
         } else {
-            alert("Por favor, preencha todos os campos!");
+            alert('Por favor, preencha todos os campos!');
         }
     });
 
