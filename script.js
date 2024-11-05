@@ -99,19 +99,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const productExpiry = productExpiryInput.value.trim();
         const productLocation = productLocationInput.value.trim();
 
-        // Verifica se todos os campos estão preenchidos antes de adicionar
+        // Verifica se todos os campos estão preenchidos
         if (productName && productQuantity && productCategory && productExpiry && productLocation) {
             addProduct(productName, productQuantity, productCategory, productExpiry, productLocation);
-            productNameInput.value = ''; // Limpa o campo de nome do produto
-            productQuantityInput.value = ''; // Limpa o campo de quantidade
-            productCategoryInput.value = ''; // Limpa o campo de categoria
-            productExpiryInput.value = ''; // Limpa o campo de validade
-            productLocationInput.value = ''; // Limpa o campo de localização
+
+            // Limpa os campos de entrada
+            productNameInput.value = '';
+            productQuantityInput.value = '';
+            productCategoryInput.value = '';
+            productExpiryInput.value = '';
+            productLocationInput.value = '';
         } else {
             alert('Por favor, preencha todos os campos!');
         }
     });
 
-    // Renderiza os produtos ao carregar a página
+    // Renderiza os produtos quando a página for carregada
     renderProducts();
 });
