@@ -1,3 +1,4 @@
+/* Estilo para a página */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -95,17 +96,18 @@ button.remove-product {
 .signature {
     text-align: center;
     margin-top: 30px;
-    font-size: 10px;
+    font-size: 20px;
     color: #555;
 }
 
 .author-name {
     font-family: 'Dancing Script', cursive;
-    font-size: 20px;
-    color: #4CAF50; 
+    font-size: 30px;
+    color: #4CAF50; /* cor de assinatura verde */
     font-weight: bold;
     margin-left: 5px;
 }
+
 
 
 
