@@ -95,6 +95,18 @@ button.complete-task {
     cursor: pointer;
 }
 
+button.add-quantity, button.remove-quantity {
+    background: none;
+    border: none;
+    color: #4CAF50;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.add-quantity:hover, button.remove-quantity:hover {
+    color: #45a049;
+}
+
 #stock-counter {
     text-align: center;
     margin-top: 20px;
