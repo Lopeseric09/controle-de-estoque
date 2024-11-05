@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>
                     <button class="remove-product" data-index="${index}">Remover</button>
                     <button class="complete-task" data-index="${index}">Concluir</button>
+                    <button class="add-quantity" data-index="${index}">+</button>
+                    <button class="remove-quantity" data-index="${index}">-</button>
                 </td>
             `;
             stockList.appendChild(productRow);
@@ -75,35 +77,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 markAsCompleted(index);
             });
         });
+
+        // Adiciona evento para adicionar quantidade de um produto
+        const addQuantityButtons = document.querySelectorAll('.add-quantity');
+        addQuantityButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.target.dataset.index;
+                changeQuantity(index, 1); // Aumenta a quantidade em 1
+            });
+        });
+
+        // Adiciona evento para remover quantidade de um produto
+        const removeQuantityButtons = document.querySelectorAll('.remove-quantity');
+        removeQuantityButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.target.dataset.index;
+                changeQuantity(index, -1); // Diminui a quantidade em 1
+            });
+        });
     }
 
-    // Função para remover um produto do estoque
+    // Função para remover um produto
     function removeProduct(index) {
-        products.splice(index, 1); // Remove o produto pelo índice
+        products.splice(index, 1); // Remove o produto da lista
         saveProductsToLocalStorage();
-        renderProducts(); // Re-renderiza a lista de produtos
+        renderProducts();
     }
 
-    // Função para marcar o produto como concluído
+    // Função para marcar um produto como concluído
     function markAsCompleted(index) {
-        products[index].completed = true; // Marca o produto como concluído
+        products[index].completed = !products[index].completed;
         saveProductsToLocalStorage();
-        renderProducts(); // Re-renderiza a lista de produtos
+        renderProducts();
     }
 
-    // Adiciona produto ao clicar no botão
+    // Função para alterar a quantidade de um produto
+    function changeQuantity(index, amount) {
+        if (products[index].quantity + amount >= 0) {
+            products[index].quantity += amount;
+            saveProductsToLocalStorage();
+            renderProducts();
+        }
+    }
+
+    // Adiciona um novo produto ao clicar no botão "Adicionar Produto"
     addProductButton.addEventListener('click', () => {
         const productName = productNameInput.value.trim();
-        const productQuantity = productQuantityInput.value.trim();
+        const productQuantity = parseInt(productQuantityInput.value, 10);
         const productCategory = productCategoryInput.value.trim();
-        const productExpiry = productExpiryInput.value.trim();
+        const productExpiry = productExpiryInput.value;
         const productLocation = productLocationInput.value.trim();
 
-        // Verifica se todos os campos estão preenchidos
         if (productName && productQuantity && productCategory && productExpiry && productLocation) {
             addProduct(productName, productQuantity, productCategory, productExpiry, productLocation);
-
-            // Limpa os campos de entrada
             productNameInput.value = '';
             productQuantityInput.value = '';
             productCategoryInput.value = '';
