@@ -8,20 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const stockList = document.getElementById('stock-list');
     const stockCounter = document.getElementById('stock-counter');
 
-    // Carrega os produtos do localStorage ou inicia com um array vazio
+    // Carregar produtos do localStorage ou criar uma lista vazia
     let products = JSON.parse(localStorage.getItem('products')) || [];
 
-    // Função para salvar os produtos no localStorage
+    // Salvar produtos no localStorage
     function saveProductsToLocalStorage() {
         localStorage.setItem('products', JSON.stringify(products));
     }
 
-    // Função para atualizar o contador de produtos no estoque
+    // Atualizar contador de produtos
     function updateStockCounter() {
         stockCounter.textContent = `Produtos no estoque: ${products.length}`;
     }
 
-    // Função para adicionar um novo produto ao estoque
+    // Função para adicionar um novo produto
     function addProduct(name, quantity, category, expiry, location) {
         const product = {
             name: name,
@@ -35,16 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
         renderProducts();
     }
 
-    // Função para renderizar os produtos no estoque
+    // Renderizar a lista de produtos
     function renderProducts() {
         stockList.innerHTML = ''; // Limpa a lista antes de renderizar
         products.forEach((product, index) => {
             const productRow = document.createElement('tr');
-
             productRow.innerHTML = `
                 <td>${product.name}</td>
                 <td>
-                    ${product.quantity} 
+                    ${product.quantity}
                     <button class="remove-quantity" data-index="${index}">-</button>
                     <button class="add-quantity" data-index="${index}">+</button>
                 </td>
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         updateStockCounter();
 
-        // Adiciona o evento de remoção de produto para cada botão "Remover"
+        // Adicionar evento para remover produto
         const removeButtons = document.querySelectorAll('.remove-product');
         removeButtons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -68,33 +67,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Adiciona evento para adicionar quantidade de um produto
+        // Adicionar evento para adicionar quantidade
         const addQuantityButtons = document.querySelectorAll('.add-quantity');
         addQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, 1); // Aumenta a quantidade em 1 unidade
+                changeQuantity(index, 1); // Aumenta a quantidade em 1
             });
         });
 
-        // Adiciona evento para remover quantidade de um produto
+        // Adicionar evento para remover quantidade
         const removeQuantityButtons = document.querySelectorAll('.remove-quantity');
         removeQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, -1); // Diminui a quantidade em 1 unidade
+                changeQuantity(index, -1); // Diminui a quantidade em 1
             });
         });
     }
 
-    // Função para remover um produto
+    // Remover produto da lista
     function removeProduct(index) {
-        products.splice(index, 1); // Remove o produto da lista
+        products.splice(index, 1); // Remove o produto do array
         saveProductsToLocalStorage();
         renderProducts();
     }
 
-    // Função para alterar a quantidade de um produto
+    // Alterar quantidade de um produto
     function changeQuantity(index, amount) {
         if (products[index].quantity + amount >= 0) {
             products[index].quantity += amount;
@@ -103,16 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Adiciona um novo produto ao clicar no botão "Adicionar Produto"
+    // Adicionar produto ao clicar no botão
     addProductButton.addEventListener('click', () => {
         const productName = productNameInput.value.trim();
-        const productQuantity = parseInt(productQuantityInput.value); // Use parseInt para garantir que é um número inteiro
+        const productQuantity = parseInt(productQuantityInput.value); // Garantir que é um número inteiro
         const productCategory = productCategoryInput.value.trim();
         const productExpiry = productExpiryInput.value;
         const productLocation = productLocationInput.value.trim();
 
-        // Validação dos campos antes de adicionar o produto
-        if (productName && !isNaN(productQuantity) && productQuantity > 0 && productCategory && productExpiry && productLocation) {
+        // Validação para garantir que todos os campos foram preenchidos corretamente
+        if (productName && !isNaN(productQuantity) && productCategory && productExpiry && productLocation) {
             addProduct(productName, productQuantity, productCategory, productExpiry, productLocation);
             productNameInput.value = '';
             productQuantityInput.value = '';
@@ -124,11 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Renderiza os produtos quando a página for carregada
-    renderProducts();
-});
-
-
-    // Renderiza os produtos quando a página for carregada
+    // Renderizar os produtos ao carregar a página
     renderProducts();
 });
