@@ -92,5 +92,21 @@ button.remove-product {
     color: white;
 }
 
+/* Estilos para a assinatura */
+.signature {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+    color: #555;
+}
+
+.author-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    color: #4CAF50; /* cor de assinatura verde */
+    font-weight: bold;
+    margin-left: 5px;
+}
+
 
 
