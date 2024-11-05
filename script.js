@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, 0.1); 
+                changeQuantity(index, 1); 
             });
         });
 
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         removeQuantityButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const index = e.target.dataset.index;
-                changeQuantity(index, -0.1);
+                changeQuantity(index, -1);
             });
         });
     }
