@@ -88,8 +88,21 @@ button.remove-product {
     cursor: pointer;
 }
 
+button.complete-task {
+    background: none;
+    border: none;
+    color: green;
+    cursor: pointer;
+}
+
 #stock-counter {
     text-align: center;
     margin-top: 20px;
     font-weight: bold;
+}
+
+.completed {
+    background-color: #e0ffe0;  /* Marca a célula com fundo verde claro quando o item é completado */
+    text-decoration: line-through;
+    color: gray;
 }
