@@ -16,12 +16,12 @@
             <input type="text" id="product-name" placeholder="Nome do Produto" required>
             <input type="number" id="product-quantity" placeholder="Quantidade" min="1" required>
             <input type="text" id="product-category" placeholder="Categoria" required>
-            <input type="date" id="product-expiry" placeholder="Data de Validade" required>
+            <input type="date" id="product-expiry" required>
             <input type="text" id="product-location" placeholder="Localização" required>
             <button id="add-product">Adicionar Produto</button>
         </div>
 
-        <!-- Tabela para mostrar os produtos no estoque -->
+        <!-- Tabela de produtos no estoque -->
         <table>
             <thead>
                 <tr>
@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody id="stock-list">
-                <!-- Os produtos serão adicionados aqui dinamicamente -->
+                <!-- Produtos adicionados aparecerão aqui -->
             </tbody>
         </table>
 
@@ -44,3 +44,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
