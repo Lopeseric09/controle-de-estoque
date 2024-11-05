@@ -1,3 +1,4 @@
+/* Reset e configurações iniciais */
 * {
     margin: 0;
     padding: 0;
@@ -120,6 +121,13 @@ button.add-quantity:hover, button.remove-quantity:hover {
     margin-top: 20px;
     font-weight: bold;
 }
+
+.completed {
+    background-color: #e0ffe0;  /* Marca a célula com fundo verde claro quando o item é completado */
+    text-decoration: line-through;
+    color: gray;
+}
+
 
 .completed {
     background-color: #e0ffe0;  
