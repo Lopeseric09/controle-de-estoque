@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
             
             // Exibe alerta se a quantidade do produto for menor que 1
-            if (product.quantity < 1) {
+            if (product.quantity < 2) {
                 alert(`O produto "${product.name}" está acabando!`);
             }
         }
