@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
         <h1>Controle de Estoque</h1>
 
-        <!-- Entrada para nome do produto -->
-        <div class="input-group">
-            <input type="text" id="product-name" placeholder="Nome do Produto">
+        <!-- Formulário para adicionar um novo produto -->
+        <div class="form-container">
+            <input type="text" id="product-name" placeholder="Nome do Produto" required>
             <input type="number" id="product-quantity" placeholder="Quantidade" min="1" required>
-            <input type="text" id="product-category" placeholder="Categoria">
-            <input type="date" id="product-expiry">
-            <input type="text" id="product-location" placeholder="Localização">
+            <input type="text" id="product-category" placeholder="Categoria" required>
+            <input type="date" id="product-expiry" required>
+            <input type="text" id="product-location" placeholder="Localização" required>
             <button id="add-product">Adicionar Produto</button>
         </div>
 
-        <!-- Tabela de Estoque -->
-        <table id="stock-table">
+        <!-- Tabela de produtos no estoque -->
+        <table>
             <thead>
                 <tr>
                     <th>Produto</th>
@@ -32,7 +33,9 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody id="stock-list"></tbody>
+            <tbody id="stock-list">
+                <!-- Produtos adicionados aparecerão aqui -->
+            </tbody>
         </table>
 
         <p id="stock-counter">Produtos no estoque: 0</p>
@@ -41,7 +44,6 @@
     <script src="script.js"></script>
 </body>
 </html>
-
 
 
 
